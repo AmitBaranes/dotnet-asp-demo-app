@@ -1,19 +1,21 @@
 pipeline {
    agent {label 'Production'}
    environment { 
-   NAME = "myapp"
-   VERSION = "${env.BUILD_ID}-${env.GIT_COMMIT}"
-   IMAGE = "${NAME}:${VERSION}"}
+   VERSION = "${env.BUILD_ID}"
    stages {
       stage("Docker build") {
          steps {
-            echo "Version : ${VERSION} IMAGE: ${IMAGE}"
-            sh "docker build -t amitbaranes/dotnet-demo-sela:latest ."
+            sh "docker build -t amitbaranes/dotnet-demo-sela:${VERSION} ."
+         }
+      }
+      stage("Login to docker hub") {
+         steps {
+           sh "docker login --username=${env.DOCKERHUB_USER_NAME} --password=${env.DOCKERHUB_PASSWORD}"
          }
       }
       stage("Docker push") {
          steps {
-           sh "docker push  amitbaranes/dotnet-demo-sela:latest"
+           sh "docker push  amitbaranes/dotnet-demo-sela:${VERSION}"
          }
       }
    } 
