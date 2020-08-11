@@ -12,5 +12,5 @@ pipeline {
            sh "sudo dotnet publish -c release -o /app --no-restore"
          }   
       }     
-   }   
+   }       
 }
