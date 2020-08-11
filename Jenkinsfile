@@ -1,11 +1,9 @@
 pipeline {
-   agent {label 'Production'}
-   environment { 
-   VERSION = "${env.BUILD_ID}"}
+   agent {label 'Test'}
    stages {
       stage("Docker build") {
          steps {
-            sh "docker build -t amitbaranes/dotnet-demo-sela:${VERSION} ."
+            sh "docker build -t amitbaranes/dotnet-demo-sela:${env.BUILD_ID} ."
          }
       }
       stage("Login to docker hub") {
