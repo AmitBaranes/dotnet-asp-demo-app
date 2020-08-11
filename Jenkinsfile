@@ -1,5 +1,5 @@
 pipeline {
-   agent {label 'Slave'}
+   agent {label 'Production'}
    stages {
       stage('Restore')
       {
@@ -13,4 +13,9 @@ pipeline {
          }
       }
    } 
+    post {
+        always {
+            cleanWs deleteDirs: true, notFailBuild: true
+        }
+    }
 }
