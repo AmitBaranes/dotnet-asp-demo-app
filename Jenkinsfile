@@ -3,8 +3,7 @@ pipeline {
    environment { 
    NAME = "myapp"
    VERSION = "${env.BUILD_ID}-${env.GIT_COMMIT}"
-   IMAGE = "${NAME}:${VERSION}"
-    }
+   IMAGE = "${NAME}:${VERSION}"}
    stages {
       stage("Docker build") {
          steps {
@@ -16,7 +15,6 @@ pipeline {
          steps {
            sh "docker push  amitbaranes/dotnet-demo-sela:latest"
          }
-      }
       }
    } 
     post {
