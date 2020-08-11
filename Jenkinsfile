@@ -1,16 +1,22 @@
 pipeline {
    agent {label 'Production'}
+   environment { 
+   NAME = "myapp"
+   VERSION = "${env.BUILD_ID}-${env.GIT_COMMIT}"
+   IMAGE = "${NAME}:${VERSION}"
+    }
    stages {
-      stage('Restore')
-      {
+      stage("Docker build") {
          steps {
-           sh "dotnet restore"
+            echo "Version : ${VERSION} IMAGE: ${IMAGE}"
+            sh "docker build -t amitbaranes/dotnet-demo-sela:latest ."
          }
       }
-      stage("Publish") {
+      stage("Docker push") {
          steps {
-           sh "sudo dotnet publish -c release -o /app --no-restore"
+           sh "docker push  amitbaranes/dotnet-demo-sela:latest"
          }
+      }
       }
    } 
     post {
