@@ -16,6 +16,11 @@ pipeline {
            sh "docker push  amitbaranes/dotnet-demo-sela:${env.BUILD_ID}"
          }
       }
+      stage("Docker run ") {
+         steps {
+           sh " docker run -d -p 8080:80 --name myapp amitbaranes/dotnet-demo-sela:${env.BUILD_ID}"
+         }
+      }
    } 
     post {
         always {
