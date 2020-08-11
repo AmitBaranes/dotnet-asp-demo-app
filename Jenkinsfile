@@ -13,7 +13,7 @@ pipeline {
       }
       stage("Docker push") {
          steps {
-           sh "docker push  amitbaranes/dotnet-demo-sela:${VERSION}"
+           sh "docker push  amitbaranes/dotnet-demo-sela:${env.BUILD_ID}"
          }
       }
    } 
