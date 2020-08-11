@@ -1,5 +1,5 @@
 pipeline {
-   agent any
+   agent {lable 'Slave'}
    stages {
       stage('Restore')
       {
