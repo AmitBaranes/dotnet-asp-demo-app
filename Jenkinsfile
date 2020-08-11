@@ -4,7 +4,7 @@ pipeline {
       stage('Restore')
       {
          steps {
-           sh "dotnet restore"
+           sh "sudo dotnet restore"
          }
       }
       stage("Publish") {
