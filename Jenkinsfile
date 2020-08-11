@@ -10,7 +10,7 @@ pipeline {
       stage("Publish") {
          steps {
            sh "sudo dotnet publish -c release -o /app --no-restore"
-         }
+         }   
       }     
    }   
 }
